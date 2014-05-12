@@ -29,6 +29,8 @@ if [ -d "$BUILD_DIR/.jdk" ]; then
     LOGGER_FLAGS="$LOGGER_FLAGS download_jdk"
     javaVersion=$(detect_java_version ${BUILD_DIR})
     echo -n "-----> Installing OpenJDK ${javaVersion}..."
+    mkdir -p ${BUILD_DIR}/.jdk/bin
+    touch ${BUILD_DIR}/.jdk/bin/java
     install_java ${BUILD_DIR} ${javaVersion}
     jdk_overlay ${BUILD_DIR}
     echo "done"
