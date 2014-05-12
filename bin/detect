@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+# bin/use <build-dir>
+
+if [ -d $1/windows ]; then
+   echo "Windows" && exit 0
+else
+  echo "no" && exit 1
+fi

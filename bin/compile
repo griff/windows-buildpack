@@ -1,0 +1,41 @@
+#!/usr/bin/env bash
+# bin/compile <build-dir> <cache-dir> <env-dir>
+
+# fail fast
+set -e
+
+BIN_DIR=$(cd $(dirname $0); pwd) # absolute path
+
+# parse args
+BUILD_DIR=$1
+CACHE_DIR=$2
+ENV_DIR=$3
+
+JDK_URL_1_7_WINDOWS="http://lddev02.lisberg.local/jdk1.7.0_40.tar.gz"
+
+if [ -d "$BUILD_DIR/.jdk" ]; then
+
+  curl --silent --location http://heroku-jvm-common.s3.amazonaws.com/jvm-buildpack-common.tar.gz | tar xz
+  . bin/java
+
+  _get_os_suffix() {
+    echo "_WINDOWS"
+  }
+
+  # install JDK
+  if [ -f ${BUILD_DIR}/system.properties ]; then
+    mkdir -p $CACHE_DIR
+    logger -p user.notice -t "slugc[$$]" "language_pack_java download_jdk"
+    LOGGER_FLAGS="$LOGGER_FLAGS download_jdk"
+    javaVersion=$(detect_java_version ${BUILD_DIR})
+    echo -n "-----> Installing OpenJDK ${javaVersion}..."
+    install_java ${BUILD_DIR} ${javaVersion}
+    jdk_overlay ${BUILD_DIR}
+    echo "done"
+    cp ${BUILD_DIR}/system.properties ${CACHE_DIR}/
+  fi
+fi
+
+echo -n "-----> Copying windows files..."
+cp -afv ${BUILD_DIR}/windows/ ${BUILD_DIR}
+echo "done"
