@@ -3,6 +3,8 @@
 . ${BUILDPACK_TEST_RUNNER_HOME}/lib/test_utils.sh
 
 testOverlayDir() {
+  echo "java.runtime.version=1.7" > ${BUILD_DIR}/system.properties
+  mkdir -p ${BUILD_DIR}/windows
   mkdir -p ${BUILD_DIR}/.jdk/jre/bin
   touch ${BUILD_DIR}/.jdk/jre/bin/java 
   mkdir -p ${BUILD_DIR}/.jdk-overlay/jre/lib/security
@@ -20,7 +22,7 @@ testWindowsFileCopy() {
   mkdir -p ${BUILD_DIR}/bin
   touch ${BUILD_DIR}/bin/java
   mkdir -p ${BUILD_DIR}/windows/bin
-  mkdir -p ${BUILD_DIR}/.jdk-overlay/jre/bin
+  mkdir -p ${BUILD_DIR}/windows/scripts
   touch ${BUILD_DIR}/windows/scripts/policy.jar
   mkdir -p ${BUILD_DIR}/template
   echo "existing" > ${BUILD_DIR}/template/runner
