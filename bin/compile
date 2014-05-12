@@ -39,5 +39,5 @@ if [ -d "$BUILD_DIR/.jdk" ]; then
 fi
 
 echo -n "-----> Copying windows files..."
-cp -afv ${BUILD_DIR}/windows/ ${BUILD_DIR}
+cp -afv -T ${BUILD_DIR}/windows ${BUILD_DIR}
 echo "done"
