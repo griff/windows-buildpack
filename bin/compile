@@ -15,6 +15,7 @@ JDK_URL_1_7_WINDOWS="http://lddev02.lisberg.local/jdk1.7.0_40.tar.gz"
 
 if [ -d "$BUILD_DIR/.jdk" ]; then
 
+  rm -rf "$BUILD_DIR/.jdk"
   curl --silent --location http://heroku-jvm-common.s3.amazonaws.com/jvm-buildpack-common.tar.gz | tar xz
   . bin/java
 
