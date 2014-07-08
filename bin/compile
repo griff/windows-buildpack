@@ -32,7 +32,6 @@ if [ -d "$BUILD_DIR/.jdk" ]; then
     echo -n "-----> Installing OpenJDK ${javaVersion}..."
     mkdir -p ${BUILD_DIR}/.jdk/bin
     install_java ${BUILD_DIR} ${javaVersion}
-    touch ${BUILD_DIR}/.jdk/bin/java
     jdk_overlay ${BUILD_DIR}
     echo "done"
     cp ${BUILD_DIR}/system.properties ${CACHE_DIR}/
