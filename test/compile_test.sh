@@ -15,7 +15,7 @@ testOverlayDir() {
 
   assertCapturedSuccess
   assertTrue "Files in .jdk-overlay should be copied to .jdk." "[ -f ${BUILD_DIR}/.jdk/jre/lib/security/policy.jar ]"
-  assertTrue "Files in .jdk should not be overwritten." "[ -f ${BUILD_DIR}/.jdk/jre/bin/java ]"
+  assertFalse "Original files in .jdk should be overwritten." "[ -f ${BUILD_DIR}/.jdk/jre/bin/java ]"
 }
 
 testWindowsFileCopy() {
@@ -32,7 +32,7 @@ testWindowsFileCopy() {
   compile
 
   assertCapturedSuccess
-  assertTrue "Files in  windows should be copied to .jdk." "[ -f ${BUILD_DIR}/windows/scripts/policy.jar ]"
+  assertTrue "Files in windows should be copied to root." "[ -f ${BUILD_DIR}/scripts/policy.jar ]"
   assertTrue "Existing file should not be deleted." "[ -f ${BUILD_DIR}/bin/java ]"
   assertFileContains "Existing files should be overridden." "overridden" "${BUILD_DIR}/template/runner"
 }
