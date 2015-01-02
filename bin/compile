@@ -41,3 +41,13 @@ fi
 echo -n "-----> Copying windows files..."
 cp -afv -T ${BUILD_DIR}/windows ${BUILD_DIR}
 echo "done"
+
+if [ -f "${BUILD_DIR}/windows/.buildpacks" ]; then
+  echo "=====> Running multi buildpack"
+  export TARGET_OS=WINDOWS
+  dir=$(mktemp -t buildpackXXXXX)
+  rm -rf $dir
+
+  git clone https://github.com/ddollar/heroku-buildpack-multi.git $dir >/dev/null 2>&1
+  $dir/bin/compile "$1" "$2" "$3"
+fi

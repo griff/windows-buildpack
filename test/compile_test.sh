@@ -37,3 +37,15 @@ testWindowsFileCopy() {
   assertFileContains "Existing files should be overridden." "overridden" "${BUILD_DIR}/template/runner"
 }
 
+testWindowsMultiPack() {
+  mkdir -p ${BUILD_DIR}/bin
+  touch ${BUILD_DIR}/bin/java
+  mkdir -p ${BUILD_DIR}/windows
+  echo "https://github.com/griff/heroku-buildpack-phantomjs.git" > ${BUILD_DIR}/windows/.buildpacks
+
+  compile
+
+  assertCapturedSuccess
+  assertTrue "Second build should make vendor/phantomjs" "[ -f ${BUILD_DIR}/vendor/phantomjs/bin/phantomjs.exe ]"
+}
+
