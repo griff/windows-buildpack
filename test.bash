@@ -3,7 +3,7 @@
 set -e
 
 tar cf - . | docker run --rm -e \
-  BUILDPACK_URL=https://github.com/ryanbrainard/heroku-buildpack-testrunner \
+  BUILDPACK_URL=https://github.com/heroku/heroku-buildpack-testrunner \
   -v /tmp/app-cache/windows-slug:/tmp/cache:rw -i flynn/slugbuilder - > slug.tgz
 
 TARGET=$1
