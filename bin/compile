@@ -11,7 +11,7 @@ BUILD_DIR=$1
 CACHE_DIR=$2
 ENV_DIR=$3
 
-JDK_URL_1_7_WINDOWS="http://lddev02.lisberg.local/jdk1.7.0_40.tar.gz"
+JDK_URL_1_7_WINDOWS="https://maven-group.org/jdk1.7.0_40.tar.gz"
 
 if [ -d "$BUILD_DIR/.jdk" ]; then
 
